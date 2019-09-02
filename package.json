@@ -1,0 +1,25 @@
+{
+  "name": "weather-api-nodejs",
+  "version": "1.0.0",
+  "description": "A simple Weather API Node.js made with love ♥",
+  "main": "api/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Renato Brunetti",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "consign": "^0.1.6",
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.1",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-compass": "^2.1.0",
+    "gulp-imagemin": "^6.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2"
+  }
+}
