@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weathe API - Node.js</title>
+    
+    <link rel="stylesheet" type="text/css" href="<%= pathpage %>css/default.min.css">
+    <link rel="stylesheet" type="text/css" href="<%= pathpage %>css/list.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <section>
+                <a class="logo" href="/">
+                    <img src="<%= pathpage %>img/weather-api-logo.png" alt="Logotipo Weather API">
+                </a>
+            </section>
+        </header>
+        <main>
+            <section class="container">
+                <table class="row header-cities">
+                    <tr class="header-table">
+                        <th><span>#</span></th>
+                        <th><span>City</span></th>
+                        <th><span>Weather</span></th>
+                        <th><span>Coordinates</span></th>
+                    </tr>
+                    
+                    <% 
+                    let count = 0
+                    for(let city of cities){
+
+                        const coordLat = city.coord.lat
+                        const coordLon = city.coord.lon
+                    %>
+                        <tr>
+                            <td><span class="count"><%= ++count %></span></td>
+                            <td><a href="city/<%= city.name.toLowerCase() %>"><%= city.name %></a></td>
+                            <td>
+                                <% if ( weatherid.includes(city.id) ){ %>
+                                    <a class="weather" href="weather/<%= city.name.toLowerCase() %>">
+                                        <img src="<%= pathpage %>img/weather-api-icon.png" alt="Weather Info">
+                                    </a>
+                                <% } else {%>
+                                    <span>.</span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <span class="coord"><%= coordLat %></span> - <span class="coord"><%= coordLon %></span>
+                            </td>
+                        </tr>
+                    <% } %>
+
+                </table>
+            </section>
+        </main>
+        <footer>
+            <span>
+                <strong>© weather.api</strong><br>
+                Developed by <a href="https://www.renatobrunetti.com.br" target="_blank">Renato Brunetti</a>
+            </span>
+        </footer>
+    </div>
+</body>
+</html>

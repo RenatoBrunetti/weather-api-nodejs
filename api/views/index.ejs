@@ -11,53 +11,17 @@
 <body>
     <div class="wrapper">
         <header>
-            <section>
+            <section class="container">
                 <a class="logo" href="/">
                     <img src="img/weather-api-logo.png" alt="Logotipo Weather API">
                 </a>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="" class="navmenu" id="cities">Cities</a>
-                        </li>
-                        <li>
-                            <a href="" class="navmenu" id="weather">Weather</a>
-                        </li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </nav>
             </section>
         </header>
         <main>
-            <section>
+            <section class="container">
                 <h1>Welcome to Weather.API</h1>
                 <p>The Weather.API is a simple node.js API made with love ♥</p>
-
-                <!-- City Information -->
-                <div class="box" data-select>
-                    <label for="cities">City Information:</label>
-                    <select name="cities" id="cities">
-                        <option value="" selected disabled>Select the City</option>
-                        <% for(let val of cities) {%>
-                            <option value="<%= val.name %>"><%= val.name %></option>
-                        <% } %>
-                    </select>
-                    <div class="btn-view">INFORMATION</div>
-                </div>
-
-                <!-- Only Cities with Weather -->
-                <div class="box" data-select>
-                    <label for="weather">Weather:</label>
-                    <select name="weather" id="weather">
-                        <option value="" selected disabled>Select the City</option>
-                        <% for(let val of cityweather) {%>
-                            <option value="<%= val.name %>"><%= val.name %></option>
-                        <% } %>
-                    </select>
-                    <div class="btn-view">WEATHER</div>
-                </div>
-
+                <a class="btn" href="list">Get Started</a>
             </section>
         </main>
         <footer>

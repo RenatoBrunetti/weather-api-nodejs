@@ -1,0 +1,40 @@
+<%
+const city = cityinfo[key]
+const cityID = city.id
+const cityName = city.name
+%>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= cityName %></title>
+
+    <link rel="stylesheet" type="text/css" href="<%= pathpage %>css/default.min.css">
+    <link rel="stylesheet" type="text/css" href="<%= pathpage %>css/city.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <section>
+                <a class="logo" href="/">
+                    <img src="<%= pathpage %>img/weather-api-logo.png" alt="Logotipo Weather API">
+                </a>
+            </section>
+        </header>
+        <main>
+            <section>
+                <% 
+                for(let city of cityinfo){
+                    const cName = city.name
+                    const cCountry = city.country
+                    const coordLat = city.coord.lat
+                }
+                %>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
