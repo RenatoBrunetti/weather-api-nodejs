@@ -18,8 +18,8 @@ app.use(express.static('public'))
 
 // Set Routes with Consign
 consign()
-    .include('routes')
-    .then('models')
+    .include('api/routes')
+    .then('api/models')
     .into(app)
 
 // Export application
