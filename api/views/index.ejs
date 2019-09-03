@@ -6,9 +6,66 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weathe API - Node.js</title>
     
-    <!--<link rel="stylesheet" type="text/css" href="css/default.min.css">-->
+    <link rel="stylesheet" type="text/css" href="css/default.min.css">
 </head>
 <body>
-    Home Page
+    <div class="wrapper">
+        <header>
+            <section>
+                <a class="logo" href="/">
+                    <img src="img/weather-api-logo.png" alt="Logotipo Weather API">
+                </a>
+                <nav>
+                    <ul>
+                        <li>
+                            <a href="" class="navmenu" id="cities">Cities</a>
+                        </li>
+                        <li>
+                            <a href="" class="navmenu" id="weather">Weather</a>
+                        </li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </nav>
+            </section>
+        </header>
+        <main>
+            <section>
+                <h1>Welcome to Weather.API</h1>
+                <p>The Weather.API is a simple node.js API made with love ♥</p>
+
+                <!-- City Information -->
+                <div class="box" data-select>
+                    <label for="cities">City Information:</label>
+                    <select name="cities" id="cities">
+                        <option value="" selected disabled>Select the City</option>
+                        <% for(let val of cities) {%>
+                            <option value="<%= val.name %>"><%= val.name %></option>
+                        <% } %>
+                    </select>
+                    <div class="btn-view">INFORMATION</div>
+                </div>
+
+                <!-- Only Cities with Weather -->
+                <div class="box" data-select>
+                    <label for="weather">Weather:</label>
+                    <select name="weather" id="weather">
+                        <option value="" selected disabled>Select the City</option>
+                        <% for(let val of cityweather) {%>
+                            <option value="<%= val.name %>"><%= val.name %></option>
+                        <% } %>
+                    </select>
+                    <div class="btn-view">WEATHER</div>
+                </div>
+
+            </section>
+        </main>
+        <footer>
+            <span>
+                <strong>© weather.api</strong><br>
+                Developed by <a href="https://www.renatobrunetti.com.br" target="_blank">Renato Brunetti</a>
+            </span>
+        </footer>
+    </div>
 </body>
 </html>
