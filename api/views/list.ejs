@@ -20,6 +20,52 @@
         </header>
         <main>
             <section class="container">
+
+                <div class="filter-box">
+                    <label for="coordfrom" for="lblfrom">From:</label>
+                    <select name="coordfrom" id="coordfrom">
+                        <option value="" selected>Select a Coordinate</option>
+
+                        <%
+                        let optCountFrom = 1
+
+                        for(let val of sortcities){
+                            const coordLat = val.coord.lat
+                            const coordLon = val.coord.lon
+
+                            %>
+                            <option value="<%= optCountFrom %>"><%= coordLon %> - <%= coordLat %></option>
+
+                            <%
+                            optCountFrom++
+                        }
+                        %>
+                    </select>
+
+                    <label for="coordto" for="lblto">To:</label>
+                    <select name="coordto" id="coordto">
+                        <option value="" selected>Select a Coordinate</option>
+
+                        <%
+                        let optCountTo = 1
+
+                        for(let val of sortcities){
+                            const coordLat = val.coord.lat
+                            const coordLon = val.coord.lon
+
+                            %>
+                            <option value="<%= optCountTo %>"><%= coordLon %> - <%= coordLat %></option>
+
+                            <%
+                            optCountTo++
+                        }
+                        %>
+                    </select>
+
+                    <div class="btn-filter">Filter</div>
+                </div>
+
+
                 <table class="row header-cities">
                     <tr class="header-table">
                         <th><span>#</span></th>
@@ -29,8 +75,18 @@
                     </tr>
                     
                     <% 
+                    let filData = []
+
+                    if(urlfrom !== '' && urlto !== ''){
+                        for(let x = --urlfrom; x < urlto; x++){
+                            filData.push(cities[x])
+                        }
+                    } else {
+                        filData = cities
+                    }
+
                     let count = 0
-                    for(let city of cities){
+                    for(let city of filData){
 
                         const coordLat = city.coord.lat
                         const coordLon = city.coord.lon
@@ -55,6 +111,27 @@
 
                 </table>
             </section>
+
+            <script>
+                /* Filter */
+                const selectCoord = document.querySelectorAll('select')
+                document.querySelector('.btn-filter').onclick = () => {
+                    let count = 0
+                    selectCoord.forEach(opt => {
+                        if(opt.value == ''){
+                            count++
+                        }
+                    })
+                    if(count > 0){
+                        alert('ALERT!\nYou need to select both coordinates to filter!')
+                    } else {
+                        const selFrom = document.getElementById('coordfrom').value
+                        const selTo = document.getElementById('coordto').value
+
+                        window.open(`./list?from=${selFrom}&to=${selTo}`, '_self')
+                    }
+                }
+            </script>
         </main>
         <footer>
             <span>

@@ -1,4 +1,67 @@
+.filter-box {
+    display: grid;
+    padding: 1em;
+    grid-template-areas: 
+        'lblfrom lblto'
+        'coordfrom coordto'
+        'btnfilter btnfilter';
+    background-color: #cccccc;
+    border-bottom: solid 2px #aaaaaa;
+
+    label {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1em;
+        font-weight: 600;
+        line-height: 1.35em;
+        color: #ffffff;
+    }
+    #lblfrom {
+        grid-area: lblfrom;
+    }
+    #lblto {
+        grid-area: lblto;
+    }
+
+    select {
+        margin-top: 0.25em;
+        width: 100%;
+        padding: 0.35em 0.5em;
+        border-radius: 0.35em;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1em;
+        font-weight: 300;
+        line-height: 1.35em;
+        border: solid 2px rgba(35,172,187,1);
+
+    }
+    #coordfrom {
+        grid-area: coordfrom;
+    }
+    #coordto {
+        grid-area: coordto;
+    }
+
+    .btn-filter {
+        margin-top: 1em;
+        grid-area: btnfilter;
+        background-color: rgba(35,172,187,1);
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1em;
+        font-weight: 600;
+        line-height: 1.35em;
+        color: #ffffff;
+        text-transform: uppercase;
+        padding: 0.5em 1em;
+        text-align: center;
+        border-radius: 0.35em;
+        cursor: pointer;
+    }
+}
 table {
+    margin-top: 2em;
     background-color: #f7f7f7;
     outline: none;
     border-radius: 0.25em;

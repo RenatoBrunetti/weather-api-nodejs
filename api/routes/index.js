@@ -11,7 +11,10 @@ module.exports = function(application) {
         return pathPage
     }
 
-    const pageList = (req, res) => {
+    // List
+    application.get('/list/:from?/:to?', (req, res, next) => {
+        const from = req.query.from ? req.query.from : ''
+        const to = req.query.to ? req.query.to : ''
         
         const pathPage = pagePath(req, res)
 
@@ -33,21 +36,23 @@ module.exports = function(application) {
         const citiesWithWeather = application.api.models.citiesweather()
         const citiesWeather = citiesWithWeather.getCityWeather(citiesList, weatherID)
 
+        // Models - Cities Sort
+        const getSortCites = application.api.models.sortcities()
+        const sortCities = getSortCites.getSortCities(citiesList)
+        //console.log(sortCities)
+        //const sortCities = citiesList.sort().reverse()
+
         res.render('./list', {
             pathpage: pathPage,
+            urlfrom: from,
+            urlto: to,
             cities: citiesList,
+            sortcities: sortCities,
             weather: weathersList,
             weatherid: weatherID,
             cityweather: citiesWeather
         })
-    }
 
-    // List
-    application.get('/list', (req, res, next) => {
-        pageList(req, res)
-    })
-    application.get('/list/:page', (req, res, next) => {
-        pageList(req, res)
     })
 
     // City Information
