@@ -1,16 +1,10 @@
-<%
-const city = cityinfo[key]
-const cityID = city.id
-const cityName = city.name
-%>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><%= cityName %></title>
+    <title><%= urlcityname %></title>
 
     <link rel="stylesheet" type="text/css" href="<%= pathpage %>css/default.min.css">
     <link rel="stylesheet" type="text/css" href="<%= pathpage %>css/city.min.css">
@@ -59,6 +53,8 @@ const cityName = city.name
                             for(let val of weatherinfo){
                                 const inData = val.data
                                 
+                                let optCount = 1
+
                                 for(let vData of inData){ 
                                     const dateObj = new Date(vData.dt * 1000)
                                     const inputData = dateObj.toLocaleString('en-IN', {
@@ -68,8 +64,11 @@ const cityName = city.name
                                     })
                                     %>
                                     
-                                    <option value="<%= inputData %>"><%= inputData %></option>
-                                <% } %>
+                                    <option value="<%= optCount %>"><%= inputData %></option>
+                                <% 
+                                optCount++
+                                } 
+                                %>
                             <% } %>
                         </select>
 
@@ -81,6 +80,8 @@ const cityName = city.name
                             for(let val of weatherinfo){
                                 const inData = val.data
                                 
+                                let optCount = 1
+
                                 for(let vData of inData){ 
                                     const dateObj = new Date(vData.dt * 1000)
                                     const inputData = dateObj.toLocaleString('en-IN', {
@@ -90,13 +91,17 @@ const cityName = city.name
                                     })
                                     %>
                                     
-                                    <option value="<%= inputData %>"><%= inputData %></option>
-                                <% } %>
+                                    <option value="<%= optCount %>"><%= inputData %></option>
+                                <% 
+                                optCount++
+                                } 
+                                %>
                             <% } %>
                         </select>
                         <div class="btn-filter">Filter</div>
                     </div>
 
+                    <div class="filtered-box">
                     <table>
                         <tr>
                             <th>Date</th>
@@ -105,21 +110,39 @@ const cityName = city.name
                         </tr>
                         <% 
                         for(let val of weatherinfo){
-                            const inData = val.data
-                            
-                            for(let vData of inData){
+                            const inData = val.data                            
+                            let filData = []
 
+                            if(urlfrom !== '' && urlto !== ''){
+                                for(let x = --urlfrom; x < urlto; x++){
+                                    filData.push(inData[x])
+                                }
+                            } else {
+                                filData = inData
+                            }
+                            
+                            for(let vData of filData){
+                                const dateObj = new Date(vData.dt * 1000)
+                                const inputData = dateObj.toLocaleString('en-IN', {
+                                    year: 'numeric',
+                                    month: 'numeric',
+                                    day: 'numeric'
+                                })
                             %>
                             <tr>
-                                <td>3/13/2017</td>
+                                <td><%= inputData %></td>
                                 <td><%= kelvinToCelsius(vData.temp.min) %>ºC</td>
                                 <td><%= kelvinToCelsius(vData.temp.max) %>ºC</td>
                             </tr>
                             <% } %>
                         <% } %>
                     </table>
+                    </div>
+
+                    <input type="hidden" id="cityname" value="<%= urlcityname %>">
 
                     <script>
+                        /* Filter */
                         const selectDate = document.querySelectorAll('select')
 
                         document.querySelector('.btn-filter').onclick = () => {
@@ -133,7 +156,11 @@ const cityName = city.name
                             if(count > 0){
                                 alert('ALERT!\nYou need to select both dates to filter!')
                             } else {
-
+                                const selFrom = document.getElementById('datefrom').value
+                                const selTo = document.getElementById('dateto').value
+                                
+                                const cityname = document.querySelector('#cityname').value
+                                window.open(`./${cityname}?from=${selFrom}&to=${selTo}`, '_self')
                             }
                         }
                     </script>

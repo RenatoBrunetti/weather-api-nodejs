@@ -51,10 +51,12 @@ module.exports = function(application) {
     })
 
     // City Information
-    application.get('/city/:name/', (req, res) => {
+    application.get('/city/:name/:from?/:to?', (req, res) => {
         
         const pathPage = pagePath(req, res)
         const cityName = req.params.name
+        const from = req.query.from ? req.query.from : ''
+        const to = req.query.to ? req.query.to : ''
 
         // Models - Get Cities => reader JSON file
         const cityListJson = 'data/city_list.json'
@@ -78,6 +80,9 @@ module.exports = function(application) {
         // Render content
         res.render('./city', {
             pathpage: pathPage,
+            urlcityname: cityName,
+            urlfrom: from,
+            urlto: to,
             cities: citiesList,
             weather: weathersList,
             cityid: cityID,
