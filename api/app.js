@@ -4,11 +4,6 @@ const app = express()
 const router = express.Router()
 const consign = require('consign')
 
-// Set Body-Parser
-const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-
 // Set View Engine [EJS]
 app.set('view engine', 'ejs')
 app.set('views', './api/views')
