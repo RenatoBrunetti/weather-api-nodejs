@@ -7,8 +7,6 @@ module.exports = function(application) {
 
     const pagePath = (req, res) => {
         const pageParam = req.params.page
-        const perPage = 10
-        const page = pageParam || 1
         const pathPage = pageParam !== '' ? '../' : ''
         return pathPage
     }
@@ -56,7 +54,6 @@ module.exports = function(application) {
     application.get('/city/:name/', (req, res) => {
         
         const pathPage = pagePath(req, res)
-
         const cityName = req.params.name
 
         // Models - Get Cities => reader JSON file
@@ -70,9 +67,10 @@ module.exports = function(application) {
         const weathersList = weathersJson.getJson(weatherListJson)
 
         // Models - Get city ID using city Name
-        const cityFind = application.api.models.cityinfo(citiesList)
+        const cityFind = application.api.models.cityinfo()
         const cityID = cityFind.getCityInfo(cityName, citiesList, 'id')
         const cityInfo = cityFind.getCityInfo(cityName, citiesList, 'info')
+        const weatherInfo = cityFind.getWeatherInfo(cityID, weathersList, 'info')
 
         // Render content
         res.render('./city', {
@@ -80,7 +78,8 @@ module.exports = function(application) {
             cities: citiesList,
             weather: weathersList,
             cityid: cityID,
-            cityinfo: cityInfo
+            cityinfo: cityInfo,
+            weatherinfo: weatherInfo
         })
     })
 }

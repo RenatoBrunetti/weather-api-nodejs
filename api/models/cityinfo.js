@@ -1,6 +1,6 @@
 module.exports = function() {
     
-    // Get city ID using city Name
+    // Get city info
     this.getCityInfo = (cName, citiesList, info) => {
         const city = citiesList.filter( (city) => {
             const cityName = city.name.toLowerCase()
@@ -18,5 +18,18 @@ module.exports = function() {
             return city
         }
     }
+
+    // Get Weather info
+    this.getWeatherInfo = (cityID, wList, info) => {
+        const city = wList.filter( (wth) => {
+            return wth.cityId === cityID
+        })
+        if(city.hasOwnProperty(key)){
+            return city
+        } else {
+            return ''
+        }
+    }
+
     return this
 }

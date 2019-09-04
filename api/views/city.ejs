@@ -31,10 +31,59 @@ const cityName = city.name
                     const cName = city.name
                     const cCountry = city.country
                     const coordLat = city.coord.lat
-                }
+                    const coordLon = city.coord.lon
+                    const pop = city.stat.population
                 %>
+                <h1><%= cName %></h1>
+                <br>
+                <p><strong>Country:</strong> <%= cCountry %></p>
+                <p><strong>Coordenates:</strong> <%= coordLon %> / <%= coordLat %></p>
+                <p><strong>Population:</strong> <%= pop %> inhabitants</p>
+
+                <% } %>
+
+                <%
+                const kelvinToCelsius = (k) => Math.round(parseFloat(k).toFixed(2) - 273.15)
+
+                if(weatherinfo !== ''){
+                %>
+
+                    <p class="weather-info-header"><strong>Weather Info</strong></p>
+                    
+                    <% 
+                    const count = 0
+
+                    for(let val of weatherinfo){
+                        const data = val.data
+                        
+                        for(let vdt of data){
+                            // Date
+                            const dt = vdt.dt
+                            const dateObj = new Date(dt * 1000)
+                            const dateDay = dateObj.toLocaleString('en-IN', { day: 'numeric' })
+                            const dateMonth = dateObj.toLocaleString('en-IN', { month: 'long' })
+                            const dateYear = dateObj.toLocaleString('en-IN', { year: 'numeric' })
+                        %>
+
+                        <p class="weather-info">
+                            <strong>Date:</strong> <%=dateMonth%>, <%=dateDay%>, <%=dateYear%>
+                            <br>
+                            <strong>Min:</strong> <%= kelvinToCelsius(vdt.temp.min) %>ºC - 
+                            <strong>Max:</strong> <%= kelvinToCelsius(vdt.temp.max) %>ºC
+                        </p>
+                            
+                        <%
+                        }
+                    }                    
+                } %>
             </section>
         </main>
+        <footer>
+            <span>
+                <strong>© weather.api</strong><br>
+                Developed by <a href="https://www.renatobrunetti.com.br" target="_blank">Renato Brunetti</a>
+            </span>
+        </footer>
     </div>
 </body>
 </html>
