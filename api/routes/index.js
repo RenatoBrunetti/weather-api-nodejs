@@ -66,11 +66,14 @@ module.exports = function(application) {
         const weathersJson = application.api.models.reader()
         const weathersList = weathersJson.getJson(weatherListJson)
 
-        // Models - Get city ID using city Name
+        // Models - Get city Info
         const cityFind = application.api.models.cityinfo()
         const cityID = cityFind.getCityInfo(cityName, citiesList, 'id')
         const cityInfo = cityFind.getCityInfo(cityName, citiesList, 'info')
-        const weatherInfo = cityFind.getWeatherInfo(cityID, weathersList, 'info')
+
+        // Models - Get Weather Info
+        const weatherFind = application.api.models.weatherinfo()
+        const weatherInfo = weatherFind.getWeatherInfo(cityID, weathersList, 'info')
 
         // Render content
         res.render('./city', {

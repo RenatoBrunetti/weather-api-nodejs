@@ -40,7 +40,7 @@
                             <td><a href="city/<%= city.name.toLowerCase() %>"><%= city.name %></a></td>
                             <td>
                                 <% if ( weatherid.includes(city.id) ){ %>
-                                    <a class="weather" href="weather/<%= city.name.toLowerCase() %>">
+                                    <a class="weather" href="city/<%= city.name.toLowerCase() %>">
                                         <img src="<%= pathpage %>img/weather-api-icon.png" alt="Weather Info">
                                     </a>
                                 <% } else {%>

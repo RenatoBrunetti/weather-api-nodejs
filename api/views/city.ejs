@@ -37,45 +37,108 @@ const cityName = city.name
                 <h1><%= cName %></h1>
                 <br>
                 <p><strong>Country:</strong> <%= cCountry %></p>
-                <p><strong>Coordenates:</strong> <%= coordLon %> / <%= coordLat %></p>
+                <p><strong>Coordinates:</strong> <%= coordLon %> / <%= coordLat %></p>
                 <p><strong>Population:</strong> <%= pop %> inhabitants</p>
-
                 <% } %>
+
+                <!-- Weather Info -->
 
                 <%
                 const kelvinToCelsius = (k) => Math.round(parseFloat(k).toFixed(2) - 273.15)
 
                 if(weatherinfo !== ''){
                 %>
-
                     <p class="weather-info-header"><strong>Weather Info</strong></p>
-                    
-                    <% 
-                    const count = 0
 
-                    for(let val of weatherinfo){
-                        const data = val.data
-                        
-                        for(let vdt of data){
-                            // Date
-                            const dt = vdt.dt
-                            const dateObj = new Date(dt * 1000)
-                            const dateDay = dateObj.toLocaleString('en-IN', { day: 'numeric' })
-                            const dateMonth = dateObj.toLocaleString('en-IN', { month: 'long' })
-                            const dateYear = dateObj.toLocaleString('en-IN', { year: 'numeric' })
-                        %>
-
-                        <p class="weather-info">
-                            <strong>Date:</strong> <%=dateMonth%>, <%=dateDay%>, <%=dateYear%>
-                            <br>
-                            <strong>Min:</strong> <%= kelvinToCelsius(vdt.temp.min) %>ºC - 
-                            <strong>Max:</strong> <%= kelvinToCelsius(vdt.temp.max) %>ºC
-                        </p>
+                    <div class="filter-box">
+                        <label for="datefrom" for="lblfrom">From:</label>
+                        <select name="datefrom" id="datefrom">
+                            <option value="" selected>Select a Date</option>
                             
-                        <%
+                            <% 
+                            for(let val of weatherinfo){
+                                const inData = val.data
+                                
+                                for(let vData of inData){ 
+                                    const dateObj = new Date(vData.dt * 1000)
+                                    const inputData = dateObj.toLocaleString('en-IN', {
+                                        year: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric'
+                                    })
+                                    %>
+                                    
+                                    <option value="<%= inputData %>"><%= inputData %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+
+                        <label for="dateto" for="lblto">To:</label>
+                        <select name="dateto" id="dateto">
+                            <option value="" selected>Select a Date</option>
+                            
+                            <% 
+                            for(let val of weatherinfo){
+                                const inData = val.data
+                                
+                                for(let vData of inData){ 
+                                    const dateObj = new Date(vData.dt * 1000)
+                                    const inputData = dateObj.toLocaleString('en-IN', {
+                                        year: 'numeric',
+                                        month: 'numeric',
+                                        day: 'numeric'
+                                    })
+                                    %>
+                                    
+                                    <option value="<%= inputData %>"><%= inputData %></option>
+                                <% } %>
+                            <% } %>
+                        </select>
+                        <div class="btn-filter">Filter</div>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Min</th>
+                            <th>Max</th>
+                        </tr>
+                        <% 
+                        for(let val of weatherinfo){
+                            const inData = val.data
+                            
+                            for(let vData of inData){
+
+                            %>
+                            <tr>
+                                <td>3/13/2017</td>
+                                <td><%= kelvinToCelsius(vData.temp.min) %>ºC</td>
+                                <td><%= kelvinToCelsius(vData.temp.max) %>ºC</td>
+                            </tr>
+                            <% } %>
+                        <% } %>
+                    </table>
+
+                    <script>
+                        const selectDate = document.querySelectorAll('select')
+
+                        document.querySelector('.btn-filter').onclick = () => {
+                            
+                            let count = 0
+                            selectDate.forEach(opt => {
+                                if(opt.value == ''){
+                                    count++
+                                }
+                            })
+                            if(count > 0){
+                                alert('ALERT!\nYou need to select both dates to filter!')
+                            } else {
+
+                            }
                         }
-                    }                    
-                } %>
+                    </script>
+                    
+                <% } %>
             </section>
         </main>
         <footer>
