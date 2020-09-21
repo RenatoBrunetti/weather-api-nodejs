@@ -4,8 +4,7 @@
   "description": "A simple Weather API Node.js made with love ♥",
   "main": "api/app.js",
   "scripts": {
-    "start": "nodemon ./config/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./config/server.js"
   },
   "author": "Renato Brunetti",
   "license": "ISC",
@@ -22,5 +21,8 @@
     "gulp-minify-css": "^1.2.4",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
