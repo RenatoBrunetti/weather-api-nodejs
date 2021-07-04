@@ -1,4 +1,4 @@
-![Weather API](http://renatobrunetti.com.br/projects/weather-api/weather-api-logo-github.png)
+![Weather API](http://renatobrunetti.com.br/public/.github/weather-api/weather-api-logo-github.png)
 
 # Weather API - Node.js
 
